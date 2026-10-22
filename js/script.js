@@ -15,34 +15,46 @@ var $ = function(id){return document.getElementById(id)};
 var rp = function(n){return "Rp. "+n.toLocaleString("id-ID")};
 var st = {}, timer = null;
 
-$("cards").innerHTML = PROGRAMS.map(function(p){
-  return '<div class="card"><div class="ico">'+p.ico+'</div><h2>'+p.title+'</h2><p>'+p.desc+'</p><button class="btn" data-id="'+p.id+'">Waqaf Sekarang</button></div>';
-}).join("");
-$("cards").onclick = function(e){
-  var id = e.target.getAttribute("data-id");
-  if(id) openForm(PROGRAMS.filter(function(p){return p.id===id})[0]);
-};
+
+
 $("ov").onclick = function(e){ if(e.target===$("ov")) closeM(); };
 
 function closeM(){ $("ov").classList.remove("on"); clearInterval(timer); }
 
-function openForm(p){
+function openForm(title){
+  var p = {title: title || "Waqaf An-Najihah"};
   st = {prog:p, amt:50000, bank:"bsi"};
+
   $("modal").innerHTML =
-  '<button class="x" onclick="closeM()" aria-label="Tutup">×</button>'+
-  '<h3>'+p.title+'</h3><p class="sub">Isi data berikut untuk melanjutkan waqaf.</p>'+
-  '<label for="nm">Nama</label><input type="text" id="nm" placeholder="Nama lengkap atau Hamba Allah">'+
-  '<label for="hp">No. HP / WhatsApp</label><input type="tel" id="hp" placeholder="08xxxxxxxxxx">'+
-  '<label>Nominal</label><div class="amts">'+
-    '<button class="amt on" data-a="50000">Rp 50.000</button>'+
-    '<button class="amt" data-a="100000">Rp 100.000</button>'+
-    '<button class="amt" data-a="0">Lainnya</button></div>'+
-  '<div id="oth" style="display:none;margin-top:8px"><input type="number" id="ot" min="10000" placeholder="Nominal lain (min. 10.000)"></div>'+
-  '<label>Metode Pembayaran</label><div class="banks">'+
-  Object.keys(BANKS).map(function(k,i){return '<div class="bank'+(i?'':' on')+'" data-b="'+k+'"><b>'+BANKS[k].short+'</b><span>'+BANKS[k].name+'</span></div>'}).join("")+
-  '</div><p class="err" id="er"></p><button class="btn" id="pay">Bayar Sekarang</button>';
+    '<button class="x" onclick="closeM()" aria-label="Tutup">×</button>'+
+    '<h3>'+p.title+'</h3>'+
+    '<p class="sub">Isi data berikut untuk melanjutkan waqaf.</p>'+
+    '<label for="nm">Nama</label>'+
+    '<input type="text" id="nm" placeholder="Nama lengkap atau Hamba Allah">'+
+    '<label for="hp">No. HP / WhatsApp</label>'+
+    '<input type="tel" id="hp" placeholder="08xxxxxxxxxx">'+
+    '<label>Nominal</label>'+
+    '<div class="amts">'+
+      '<button class="amt on" data-a="50000">Rp 50.000</button>'+
+      '<button class="amt" data-a="100000">Rp 100.000</button>'+
+      '<button class="amt" data-a="0">Lainnya</button>'+
+    '</div>'+
+    '<div id="oth" style="display:none;margin-top:8px">'+
+      '<input type="number" id="ot" min="10000" placeholder="Nominal lain (min. 10.000)">'+
+    '</div>'+
+    '<label>Metode Pembayaran</label>'+
+    '<div class="banks">'+
+      Object.keys(BANKS).map(function(k,i){
+        return '<div class="bank'+(i?'':' on')+'" data-b="'+k+'">'+
+          '<b>'+BANKS[k].short+'</b><span>'+BANKS[k].name+'</span></div>';
+      }).join("")+
+    '</div>'+
+    '<p class="err" id="er"></p>'+
+    '<button class="btn" id="pay">Bayar Sekarang</button>';
+
   $("ov").classList.add("on");
 
+  // event dipasang SETELAH form dibuat (di dalam openForm)
   $("modal").querySelector(".amts").onclick = function(e){
     var b = e.target.closest(".amt"); if(!b) return;
     this.querySelectorAll(".amt").forEach(function(x){x.classList.remove("on")});
