@@ -368,6 +368,16 @@
     min-width:58px;
     text-align:center}
 
+.bank-logo{
+  width:64px;
+  height:32px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:6px;
+  padding:3px 3px;
+  flex-shrink:0;
+}
+
 .err{color:var(--rd);
     font-size:.82rem;
     min-height:1.2em;
