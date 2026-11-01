@@ -1,9 +1,9 @@
 // ====== PENGATURAN: ganti dengan data asli yayasan ======
 var WA_NUMBER = "628000000000"; // nomor WhatsApp admin (format 62...)
 var BANKS = {
-  bsi:    {name:"Bank Syariah Indonesia (BSI)", short:"BSI",     logo:"rss/bsi_logo.svg",     no:"0000000000", an:"Yayasan Jambi Qur’an School"},
-  mandiri:{name:"Bank Mandiri",                  short:"Mandiri", logo:"rss/mandiri_logo.svg", no:"0000000000", an:"Yayasan Jambi Qur’an School"},
-  b9:     {name:"Bank 9 Jambi",                  short:"Bank 9",  logo:"rss/bank9_logo.svg",   no:"0000000000", an:"Yayasan Jambi Qur’an School"}
+  bsi:    {name:"Bank Syariah Indonesia (BSI)", short:"BSI",     logo:"rss/bsi_logo.svg",     no:"7297758963", an:"Waqaf An-Najihah"},
+  // mandiri:{name:"Bank Mandiri",                  short:"Mandiri", logo:"rss/mandiri_logo.svg", no:"0000000000", an:"Waqaf An-Najihah"},
+  b9:     {name:"Bank Pembangunan Daerah Jambi",                  short:"Bank 9",  logo:"rss/bank9_logo.svg",   no:"7001677351", an:"Waqaf An-Najihah"}
 };
 var PROGRAMS = [
   {id:"masjid", ico:"🕌", title:"Waqaf Masjid An-Najihah", desc:"Bangun dan makmurkan Masjid An-Najihah sebagai pusat ibadah dan pembinaan Al-Qur’an."},
@@ -77,7 +77,7 @@ function submit(){
       amt = st.amt || parseInt($("ot").value,10) || 0, er = $("er");
   if(!nm) return er.textContent = "Nama wajib diisi.";
   if(hp.length<9 || hp.length>15) return er.textContent = "Nomor HP tidak valid.";
-  if(amt<1000) return er.textContent = "Nominal minimal Rp 1000.";
+  if(amt<10000) return er.textContent = "Nominal minimal Rp 10.000.";
   st.inv = {nm:nm, hp:hp, amt:amt, total:amt, bank:BANKS[st.bank],
           id:"WQF"+Date.now().toString().slice(-8), exp:Date.now()+12*3600*1000};
   showInvoice();
