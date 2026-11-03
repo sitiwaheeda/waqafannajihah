@@ -98,6 +98,11 @@
     pointer-events: none;
 }
 
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
 .org {
     font-size: 1.2rem;
     letter-spacing: 0.18em;
@@ -293,10 +298,14 @@
     .hero {
         min-height: 480px;
         padding: 60px 20px;
+        padding-bottom: 110px; 
     }
 
     .hero h1 {
         font-size: 2.2rem;
+    }
+    .hero::after {
+        height: 120px;       
     }
 
     .org {
