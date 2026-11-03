@@ -269,12 +269,17 @@
 @media (max-width: 700px) {
 
     .cards {
-        grid-template-columns: 1fr;
         gap: 20px;
     }
 
+    .campaign-card {
+        flex: 0 0 100%;      /* card penuh selebar layar di HP */
+    }
+
     .campaign-image {
-        height: 220px;
+        height: auto;        /* poster tampil utuh, tidak terpotong */
+        max-height: 420px;
+        object-fit: cover;
     }
 
     .campaign-content {
@@ -282,6 +287,19 @@
     }
 
     .campaign-stats strong {
+        font-size: 1rem;
+    }
+
+    .hero {
+        min-height: 480px;
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .org {
         font-size: 1rem;
     }
 }
